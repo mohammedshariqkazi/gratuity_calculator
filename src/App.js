@@ -112,7 +112,10 @@ const App = () => {
         </div>
       )}
       <footer>
-        <p>Created with ❤️ by <a href="https://twitter.com/shariqkazi" target="_blank" rel="noopener noreferrer">Shariq Kazi
+        <p>Created with ❤️ by <a href="https://twitter.com/shariqkazi" target="_blank" rel="noopener noreferrer">Shariq Kazi</a></p>
+      </footer>
+    </div>
+  );
 };
 
 export default App;
