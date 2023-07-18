@@ -11,7 +11,6 @@ const App = () => {
   const [gratuityDues, setGratuityDues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [yearsServed, setYearsServed] = useState(0);
-  const [daysServed, setDaysServed] = useState(0);
 
   const calculateGratuity = () => {
     if (!joiningDate || !currentDate || !basicSalary || gratuityDues.length === 0) {
