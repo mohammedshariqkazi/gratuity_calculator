@@ -47,6 +47,13 @@ label {
   color: #333; /* Dark gray text color */
 }
 
+.dues-container input {
+    margin-right: 10px;
+    width: 60px;
+    padding: 5px;
+  }
+}
+
 input[type="date"], select, input[type="number"] {
   padding: 8px 12px;
   font-size: 20px; /* 20% bigger font size */
