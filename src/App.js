@@ -11,7 +11,37 @@ const App = () => {
   const [gratuityDues, setGratuityDues] = useState([]);
 
   const calculateGratuity = () => {
-    // Your calculation logic here
+    if (!joiningDate || !currentDate || !basicSalary || gratuityDues.length === 0) {
+      alert('Please fill in all the required fields.');
+      return;
+    }
+
+    const startDate = new Date(joiningDate);
+    const endDate = new Date(currentDate);
+
+    if (startDate >= endDate) {
+      alert('End of Service Date should be after the Date of Joining.');
+      return;
+    }
+
+    if (gratuityDues.some((dues) => isNaN(dues) || dues <= 0)) {
+      alert('Please enter valid gratuity dues (positive numbers) for each year.');
+      return;
+    }
+
+    setIsLoading(true); // Show loading animation
+
+    setTimeout(() => {
+      const differenceInMilliseconds = endDate - startDate;
+      const years = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365));
+      const days = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+      const gratuity = gratuityDues.reduce((sum, dues) => sum + dues, 0) * basicSalary;
+
+      setGratuityAmount(gratuity);
+      setYearsServed(years);
+      setDaysServed(days);
+      setIsLoading(false); // Hide loading animation
+    }, 2000);
   };
 
   const handleLogoClick = () => {
@@ -71,6 +101,11 @@ const App = () => {
         </select>
       </div>
       <button onClick={calculateGratuity}>Calculate Gratuity</button>
+      {isLoading && (
+        <div className="loading">
+          <div className="loading-icon"></div>
+        </div>
+      )}
       {gratuityAmount !== null && (
         <div id="result">
           <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
