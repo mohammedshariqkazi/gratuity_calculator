@@ -109,6 +109,7 @@ const App = () => {
       {gratuityAmount !== null && (
         <div id="result">
           <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
+          <p>{`Calculated based on ${yearsServed} years of service (${gratuityDues.join(' days, ')} days)`}</p>
         </div>
       )}
       <footer>
