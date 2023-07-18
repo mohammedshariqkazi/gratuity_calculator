@@ -47,7 +47,7 @@ label {
   color: #333; /* Dark gray text color */
 }
 
-.container .input-container input {
+input {
   margin-right: 10px;
   width: 60px;
   padding: 5px;
