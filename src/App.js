@@ -86,7 +86,7 @@ const App = () => {
         </select>
       </div>
       <div>
-        <label htmlFor="gratuity-dues">Gratuity Dues per Year:</label>
+        <label htmlFor="gratuity-dues">Dues per Year (21 days or above):</label>
         <div className="dues-container">
           {Array.from({ length: yearsServed }, (_, index) => (
             <input
