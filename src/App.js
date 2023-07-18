@@ -8,13 +8,10 @@ const App = () => {
   const [basicSalary, setBasicSalary] = useState('');
   const [currency, setCurrency] = useState('QAR');
   const [gratuityAmount, setGratuityAmount] = useState(null);
-  const [yearsServed, setYearsServed] = useState(0);
-  const [daysServed, setDaysServed] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   const [gratuityDues, setGratuityDues] = useState([]);
 
   const calculateGratuity = () => {
-    // Existing code
+    // Your calculation logic here
   };
 
   const handleLogoClick = () => {
@@ -36,7 +33,7 @@ const App = () => {
       <div>
         <label htmlFor="gratuity-dues">Dues per Year (21 days or above):</label>
         <div className="dues-container">
-          {Array.from({ length: yearsServed }, (_, index) => (
+          {Array.from({ length: gratuityDues.length }, (_, index) => (
             <input
               type="number"
               key={index}
@@ -74,15 +71,9 @@ const App = () => {
         </select>
       </div>
       <button onClick={calculateGratuity}>Calculate Gratuity</button>
-      {isLoading && (
-        <div className="loading">
-          <div className="loading-icon"></div>
-        </div>
-      )}
-      {gratuityAmount !== null && !isLoading && (
+      {gratuityAmount !== null && (
         <div id="result">
           <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
-          <p>Based on <span id="years-served">{yearsServed}</span> years and <span id="days-served">{daysServed}</span> days of service.</p>
         </div>
       )}
       <footer>
