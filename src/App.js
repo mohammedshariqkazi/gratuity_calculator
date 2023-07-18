@@ -9,6 +9,9 @@ const App = () => {
   const [currency, setCurrency] = useState('QAR');
   const [gratuityAmount, setGratuityAmount] = useState(null);
   const [gratuityDues, setGratuityDues] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [yearsServed, setYearsServed] = useState(0);
+  const [daysServed, setDaysServed] = useState(0);
 
   const calculateGratuity = () => {
     if (!joiningDate || !currentDate || !basicSalary || gratuityDues.length === 0) {
@@ -63,7 +66,7 @@ const App = () => {
       <div>
         <label htmlFor="gratuity-dues">Dues per Year (21 days or above):</label>
         <div className="dues-container">
-          {Array.from({ length: gratuityDues.length }, (_, index) => (
+          {Array.from({ length: yearsServed }, (_, index) => (
             <input
               type="number"
               key={index}
