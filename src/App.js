@@ -10,11 +10,11 @@ const App = () => {
   const [gratuityAmount, setGratuityAmount] = useState(null);
   const [yearsServed, setYearsServed] = useState(0);
   const [daysServed, setDaysServed] = useState(0);
-  const [calculationType, setCalculationType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [gratuityDues, setGratuityDues] = useState([]);
 
   const calculateGratuity = () => {
-    if (!joiningDate || !currentDate || !basicSalary) {
+    if (!joiningDate || !currentDate || !basicSalary || gratuityDues.length === 0) {
       alert('Please fill in all the required fields.');
       return;
     }
@@ -27,19 +27,22 @@ const App = () => {
       return;
     }
 
+    if (gratuityDues.some((dues) => isNaN(dues) || dues <= 0)) {
+      alert('Please enter valid gratuity dues (positive numbers) for each year.');
+      return;
+    }
+
     setIsLoading(true); // Show loading animation
 
     setTimeout(() => {
       const differenceInMilliseconds = endDate - startDate;
       const years = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365));
       const days = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-      const daysPerYear = years >= 5 ? 30 : 21;
-      const gratuity = (basicSalary * years * daysPerYear) / 30;
+      const gratuity = gratuityDues.reduce((sum, dues) => sum + dues, 0) * basicSalary;
 
       setGratuityAmount(gratuity);
       setYearsServed(years);
       setDaysServed(days);
-      setCalculationType(daysPerYear === 21 ? 'Based on 21 days per year' : 'Based on 30 days per year');
       setIsLoading(false); // Hide loading animation
     }, 2000);
   };
@@ -82,6 +85,24 @@ const App = () => {
           {/* Add more currency options as needed */}
         </select>
       </div>
+      <div>
+        <label htmlFor="gratuity-dues">Gratuity Dues per Year:</label>
+        <div className="dues-container">
+          {Array.from({ length: yearsServed }, (_, index) => (
+            <input
+              type="number"
+              key={index}
+              value={gratuityDues[index] || ''}
+              onChange={(e) => {
+                const newDues = [...gratuityDues];
+                newDues[index] = e.target.value === '' ? '' : parseInt(e.target.value, 10);
+                setGratuityDues(newDues);
+              }}
+              placeholder={`Year ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
       <button onClick={calculateGratuity}>Calculate Gratuity</button>
       {isLoading && (
         <div className="loading">
@@ -92,7 +113,6 @@ const App = () => {
         <div id="result">
           <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
           <p>Based on <span id="years-served">{yearsServed}</span> years and <span id="days-served">{daysServed}</span> days of service.</p>
-          <p>{calculationType}</p>
         </div>
       )}
       <footer>
