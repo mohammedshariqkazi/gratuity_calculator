@@ -60,7 +60,7 @@ const App = () => {
         <label htmlFor="current-date">End of Service Date:</label>
         <input type="date" id="current-date" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
       </div>
-      <div>
+      <div className="input-container">
         <label htmlFor="gratuity-dues">Dues per Year (21 days or above):</label>
         <div className="dues-container">
           {Array.from({ length: yearsServed }, (_, index) => (
