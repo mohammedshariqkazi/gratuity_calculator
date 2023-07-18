@@ -7,7 +7,7 @@ const App = () => {
   const [currentDate, setCurrentDate] = useState('');
   const [basicSalary, setBasicSalary] = useState('');
   const [currency, setCurrency] = useState('QAR');
-  const [gratuityAmount, setGratuityAmount] = useState(0);
+  const [gratuityAmount, setGratuityAmount] = useState(null); // Initialize to null
   const [yearsServed, setYearsServed] = useState(0);
   const [daysServed, setDaysServed] = useState(0);
   const [calculationType, setCalculationType] = useState('');
@@ -73,7 +73,7 @@ const App = () => {
         </select>
       </div>
       <button onClick={calculateGratuity}>Calculate Gratuity</button>
-      {gratuityAmount !== 0 && (
+      {gratuityAmount !== null && ( // Check if gratuityAmount is not null before rendering the result
         <div id="result">
           <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
           <p>Based on <span id="years-served">{yearsServed}</span> years and <span id="days-served">{daysServed}</span> days of service.</p>
