@@ -36,12 +36,10 @@ const App = () => {
     setTimeout(() => {
       const differenceInMilliseconds = endDate - startDate;
       const years = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365));
-      const days = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
       const gratuity = gratuityDues.reduce((sum, dues) => sum + dues, 0) * basicSalary;
 
       setGratuityAmount(gratuity);
       setYearsServed(years);
-      setDaysServed(days);
       setIsLoading(false); // Hide loading animation
     }, 2000);
   };
@@ -114,10 +112,4 @@ const App = () => {
         </div>
       )}
       <footer>
-        <p>Created with ❤️ by <a href="https://twitter.com/shariqkazi" target="_blank" rel="noopener noreferrer">Shariq Kazi</a></p>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
+        <p>Created with ❤️ by <a href="https://twitter.com/shariqkazi" target="_blank" rel="noopener noreferrer">Shariq Kazi
