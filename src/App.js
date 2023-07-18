@@ -113,3 +113,6 @@ const App = () => {
       )}
       <footer>
         <p>Created with ❤️ by <a href="https://twitter.com/shariqkazi" target="_blank" rel="noopener noreferrer">Shariq Kazi
+};
+
+export default App;
