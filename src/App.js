@@ -83,18 +83,17 @@ const App = () => {
         </select>
       </div>
       <button onClick={calculateGratuity}>Calculate Gratuity</button>
-      {isLoading ? (
+      {isLoading && (
         <div className="loading">
           <div className="loading-icon"></div>
         </div>
-      ) : (
-        gratuityAmount !== null && (
-          <div id="result">
-            <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
-            <p>Based on <span id="years-served">{yearsServed}</span> years and <span id="days-served">{daysServed}</span> days of service.</p>
-            <p>{calculationType}</p>
-          </div>
-        )
+      )}
+      {gratuityAmount !== null && !isLoading && (
+        <div id="result">
+          <p>Your gratuity amount is: <span id="gratuity-amount">{gratuityAmount.toFixed(2)}</span> {currency}</p>
+          <p>Based on <span id="years-served">{yearsServed}</span> years and <span id="days-served">{daysServed}</span> days of service.</p>
+          <p>{calculationType}</p>
+        </div>
       )}
       <footer>
         <p>Created with ❤️ by <a href="https://twitter.com/shariqkazi" target="_blank" rel="noopener noreferrer">Shariq Kazi</a></p>
